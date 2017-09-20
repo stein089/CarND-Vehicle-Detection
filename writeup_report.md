@@ -248,13 +248,13 @@ I constructed bounding boxes to cover the area of each blob detected.
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
 **Here are six frames and their corresponding heatmaps:**
-![alt text][image5]
+<img src="./writeup_media/heatmaps.png" width="700" />
 
 **Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:**
-![alt text][image6]
+<img src="./writeup_media/heatmaps1.png" width="300" />
 
 **Here the resulting bounding boxes are drawn onto the last frame in the series:**
-<img src="./writeup_media/test3_4.png" width="300" />
+<img src="./writeup_media/heatmaps2.png" width="300" />
 
 ---
 
