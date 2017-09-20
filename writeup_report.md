@@ -1,9 +1,4 @@
-##Writeup Template
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
----
-
-**Vehicle Detection Project**
+# Vehicle Detection Project
 
 The goals / steps of this project are the following:
 
@@ -24,19 +19,19 @@ The goals / steps of this project are the following:
 [image7]: ./examples/output_bboxes.png
 [video1]: ./project_video.mp4
 
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
+## [Rubric Points](https://review.udacity.com/#!/rubrics/513/view) 
+Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
----
-###Writeup / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
+### Writeup / README
+
+#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  
 
 You're reading it!
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+#### 1. Explain how you extracted HOG features from the training images.
 
 The extract_featurs method of the 'FeatureExtractor' class, takes a list of images and extracts a feature vector for each image within that list. 
 
@@ -52,169 +47,167 @@ The data is loaded in the 'Load Data' cell of the jupyter notebook.
 
 Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
-![alt text][image1]
-
+<img src="./writeup_media/car01.png" width="200" /> 		<img src="./writeup_media/notcar01.png" width="200" />
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
+###### Example of the feature vector compensation of a car image:
 
   <table style="border-collapse: collapse; border: none;">
         <tr style="border: none;">
             <td style="border: none;">
-		<img src="./writeup_media/car02.png" width="400" />
+		<img src="./writeup_media/car02.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/car05.png" width="400" />
+		<img src="./writeup_media/car05.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/car08.png" width="400" />
+		<img src="./writeup_media/car08.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/car11.png" width="400" />
-            </td>
-        </tr>
-        <tr style="border: none;">
-            <td style="border: none;">
-		<img src="./writeup_media/car03.png" width="400" />
-            </td>
-            <td style="border: none;">
-		<img src="./writeup_media/car06.png" width="400" />
-            </td>
-            <td style="border: none;">
-		<img src="./writeup_media/car09.png" width="400" />
-            </td>
-            <td style="border: none;">
-		<img src="./writeup_media/car12.png" width="400" />
+		<img src="./writeup_media/car11.png" width="200" />
             </td>
         </tr>
         <tr style="border: none;">
             <td style="border: none;">
-		<img src="./writeup_media/car04.png" width="400" />
+		<img src="./writeup_media/car03.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/car07.png" width="400" />
+		<img src="./writeup_media/car06.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/car10.png" width="400" />
+		<img src="./writeup_media/car09.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/car13.png" width="400" />
+		<img src="./writeup_media/car12.png" width="200" />
+            </td>
+        </tr>
+        <tr style="border: none;">
+            <td style="border: none;">
+		<img src="./writeup_media/car04.png" width="200" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/car07.png" width="200" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/car10.png" width="200" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/car13.png" width="200" />
             </td>
         </tr>
     </table> 
 
+###### Example of the feature vector compensation of a non-car image:
 
   <table style="border-collapse: collapse; border: none;">
         <tr style="border: none;">
             <td style="border: none;">
-		<img src="./writeup_media/notcar02.png" width="400" />
+		<img src="./writeup_media/notcar02.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/notcar05.png" width="400" />
+		<img src="./writeup_media/notcar05.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/notcar08.png" width="400" />
+		<img src="./writeup_media/notcar08.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/notcar11.png" width="400" />
-            </td>
-        </tr>
-        <tr style="border: none;">
-            <td style="border: none;">
-		<img src="./writeup_media/notcar03.png" width="400" />
-            </td>
-            <td style="border: none;">
-		<img src="./writeup_media/notcar06.png" width="400" />
-            </td>
-            <td style="border: none;">
-		<img src="./writeup_media/notcar09.png" width="400" />
-            </td>
-            <td style="border: none;">
-		<img src="./writeup_media/notcar12.png" width="400" />
+		<img src="./writeup_media/notcar11.png" width="200" />
             </td>
         </tr>
         <tr style="border: none;">
             <td style="border: none;">
-		<img src="./writeup_media/car04.png" width="400" />
+		<img src="./writeup_media/notcar03.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/car07.png" width="400" />
+		<img src="./writeup_media/notcar06.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/car10.png" width="400" />
+		<img src="./writeup_media/notcar09.png" width="200" />
             </td>
             <td style="border: none;">
-		<img src="./writeup_media/car13.png" width="400" />
+		<img src="./writeup_media/notcar12.png" width="200" />
+            </td>
+        </tr>
+        <tr style="border: none;">
+            <td style="border: none;">
+		<img src="./writeup_media/notcar04.png" width="200" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/notcar07.png" width="200" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/notcar10.png" width="200" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/notcar13.png" width="200" />
             </td>
         </tr>
     </table> 
   
 
-####2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Explain how you settled on your final choice of HOG parameters.
 
 I tried various combinations of parameters and the following combination lead to a promising result:
-
+```
 color_space = YCrCb
 color channel=ALL
 orientations = 9
 pixels_per_cell= 8
 cells_per_block=2
+```
 
 The parameter definition is done via member-variables of the FeatureExtractor class. 
 They are set in the Prepare cell of the jupyter notebook. 
 
-Together with the histogram (hist_bins=32) and spatial (size=(16, 16)) features, the feature vector contains 6156 values.
+Together with the histogram (`hist_bins=32`) and spatial (`size=(16, 16)`) features, the feature vector contains 6156 values.
 
 
-
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I trained a linear SVM using 80 Percent of the training data and saved 20 Percent for Testing.
 The SVM reaced an accuracy of 99.07 Percent.
 
-###Sliding Window Search
+### Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  
+#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  
 How did you decide what scales to search and how much to overlap windows?
 
 I decided to search only the area close to the car in order to speed-up the classification as well as avoiding false positives. I only considered pixels with an y-value from 400 to 656. 
 
 The sliding window search is performed in the find_cars method of the FeatureExtractor class. 
 
-Within that area, I decided to slide windows of four different sizes (scale = 1, 1.33, 1.66, 2). 
-Each of the windows slides with 2 cells_per_step, resulting in an overlap of 75 Percent. 
+Within that area, I decided to slide windows of four different sizes (`scale = 1, 1.33, 1.66, 2`). 
+Each of the windows slides with 2 `cells_per_step`, resulting in an overlap of 75 Percent. 
 
 The output boxes of positively classified windows are combined in a heatmap.
 Using a threshold of 1 in that heatmap causes single false-detections to decrease.
 
-
-
-####2. Show some examples of test images to demonstrate how your pipeline is working.  
+#### 2. Show some examples of test images to demonstrate how your pipeline is working.  
 What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  
 
-
 Here are some example images:
 
-<img src="./writeup_media/test6_1.jpg" width="400" />
+<img src="./writeup_media/test6_1.png" width="400" />
 
-<img src="./writeup_media/test6_2.jpg" width="400" />
+<img src="./writeup_media/test6_2.png" width="400" />
 
-<img src="./writeup_media/test6_3.jpg" width="400" />
+<img src="./writeup_media/test6_3.png" width="400" />
 
-<img src="./writeup_media/test6_4.jpg" width="400" />
+<img src="./writeup_media/test6_4.png" width="400" />
 
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./project_video.mp4)
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 The VehicleDetector class provides the process_image function used to process the single video frames. 
 Additionally the class also saves the heatmaps of the last 10 frames in the video. 
@@ -239,9 +232,9 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  
 Where will your pipeline likely fail?  
 What could you do to make it more robust?
 
@@ -250,13 +243,13 @@ The bounding boxes are sometimes too large and sometimges too small, or do only 
 Further-away-cars are not identified since rather large-scaled versions of the car images were used.
 Since I have a rather old Notebook, running the pipeline takes pretty long and thus, only a greatly limited number of parameter combinations was evaluated. 
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+* Training a more advanced classifier like a non-linear SVM or a Neuronal Network could improve the classification abilities. 
 
-The pipeline might fail in exotic situations which it was not trained for. 
+* The pipeline might fail in exotic situations which it was not trained for. 
 E.g. special shaped cars (trucks, motorcycles, etc), in special environments (tunnels, difficult lightning conditions, rain, snow, night).
 
-Other than that the pipeline is likely to fail on very curvey or mountainous roads since the area of interest might not be in the right place here. 
+* Other than that the pipeline is likely to fail on very curvey or mountainous roads since the area of interest might not be in the right place here. 
 As already mentioned, the proposed approach does not detect very far away vehicles (e.g. on a curvy road). 
 
-A nice approach would be to implement a prediction of detected vehicles for future frames e.g., using a linear model and track them over time. 
+* A nice approach would be to implement a prediction of detected vehicles for future frames e.g., using a linear model and track them over time. 
 Another idea is to improve the classifier in order to detect and classify different kind of vehicles (bikes, cars, trucks, ..), or also pedestrians. 
