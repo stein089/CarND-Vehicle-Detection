@@ -192,13 +192,40 @@ Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spat
 
 Here are some example images:
 
-<img src="./writeup_media/test6_1.png" width="400" />
-
-<img src="./writeup_media/test6_2.png" width="400" />
-
-<img src="./writeup_media/test6_3.png" width="400" />
-
-<img src="./writeup_media/test6_4.png" width="400" />
+  <table style="border-collapse: collapse; border: none;">
+        <tr style="border: none;">
+            <td style="border: none;">
+		<img src="./writeup_media/test1_1.png" width="300" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/test3_1.png" width="300" />
+            </td>
+        </tr>
+        <tr style="border: none;">
+            <td style="border: none;">
+		<img src="./writeup_media/test1_2.png" width="300" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/test3_2.png" width="300" />
+            </td>
+        </tr>
+        <tr style="border: none;">
+            <td style="border: none;">
+		<img src="./writeup_media/test1_3.png" width="300" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/test3_3.png" width="300" />
+            </td>
+        </tr>
+        <tr style="border: none;">
+            <td style="border: none;">
+		<img src="./writeup_media/test1_4.png" width="300" />
+            </td>
+            <td style="border: none;">
+		<img src="./writeup_media/test3_4.png" width="300" />
+            </td>
+        </tr>	
+    </table> 
 
 
 ### Video Implementation
