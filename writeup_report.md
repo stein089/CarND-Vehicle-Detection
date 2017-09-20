@@ -45,7 +45,7 @@ For the vehicle images, I used the provided images from the KITTI dataset as wel
 For the non-vehicle images, I used the GTI dataset as well as the Extras dataset (8968 images). 
 The data is loaded in the 'Load Data' cell of the jupyter notebook.
 
-Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+**Here is an example of one of each of the `vehicle` and `non-vehicle` classes:**
 
 <img src="./writeup_media/car01.png" width="200" /> 		<img src="./writeup_media/notcar01.png" width="200" />
 
@@ -53,7 +53,7 @@ I then explored different color spaces and different `skimage.hog()` parameters 
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-###### Example of the feature vector compensation of a car image:
+**Example of the feature vector compensation of a car image:**
 
   <table style="border-collapse: collapse; border: none;">
         <tr style="border: none;">
@@ -100,7 +100,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
         </tr>
     </table> 
 
-###### Example of the feature vector compensation of a non-car image:
+**Example of the feature vector compensation of a non-car image:**
 
   <table style="border-collapse: collapse; border: none;">
         <tr style="border: none;">
@@ -190,7 +190,7 @@ What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  
 
-Here are some example images:
+**Here are some example images:**
 
   <table style="border-collapse: collapse; border: none;">
         <tr style="border: none;">
@@ -230,11 +230,12 @@ Here are some example images:
 
 ### Video Implementation
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+#### 1. Provide a link to your final video output. 
+
+Here's a [link to my video result](./test_videos_output/project_video.mp4)
 
 
-#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 The VehicleDetector class provides the process_image function used to process the single video frames. 
 Additionally the class also saves the heatmaps of the last 10 frames in the video. 
@@ -246,16 +247,14 @@ I constructed bounding boxes to cover the area of each blob detected.
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
-
+**Here are six frames and their corresponding heatmaps:**
 ![alt text][image5]
 
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
+**Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:**
 ![alt text][image6]
 
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
+**Here the resulting bounding boxes are drawn onto the last frame in the series:**
+<img src="./writeup_media/test3_4.png" width="300" />
 
 ---
 
