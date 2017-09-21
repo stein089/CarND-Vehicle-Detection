@@ -23,17 +23,17 @@ You're reading it!
 
 #### 1. Explain how you extracted HOG features from the training images.
 
-The extract_featurs method of the 'FeatureExtractor' class, takes a list of images and extracts a feature vector for each image within that list. 
+The extract_featurs method of the *FeatureExtractor* class, takes a list of images and extracts a feature vector for each image within that list. 
 
-This is done by calling the single_img_features method, which performs the HOG feature extraction as well as the extraction of spatial features and histogram features. Depending on the desired HOG-channel, the HOG feature vector can contain the HOG features of a single image-channel or a concatenated version of all three image-channels. 
+This is done by calling the `single_img_features` method, which performs the HOG feature extraction as well as the extraction of spatial features and histogram features. Depending on the desired HOG-channel, the HOG feature vector can contain the HOG features of a single image-channel or a concatenated version of all three image-channels. 
 
-The code for the actual HOG feature-extraction is contained in the get_hog_features method of the FeatureExtractor class in the IPython notebook.
+The code for the actual HOG feature-extraction is contained in the `get_hog_features` method of the *FeatureExtractor* class in the IPython notebook.
 
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  
 For the vehicle images, I used the provided images from the KITTI dataset as well as all GTI images (8792 images).
 For the non-vehicle images, I used the GTI dataset as well as the Extras dataset (8968 images). 
-The data is loaded in the 'Load Data' cell of the jupyter notebook.
+The data is loaded in the *Load Data* cell of the jupyter notebook.
 
 **Here is an example of one of each of the `vehicle` and `non-vehicle` classes:**
 
@@ -154,8 +154,7 @@ They are set in the Prepare cell of the jupyter notebook.
 
 Together with the histogram (`hist_bins=32`) and spatial (`size=(16, 16)`) features, the feature vector contains 6156 values.
 
-
-#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how you trained a classifier using your selected HOG features (and color features if you used them).
 
 I trained a linear SVM using 80 Percent of the training data and saved 20 Percent for Testing.
 The SVM reaced an accuracy of 99.07 Percent.
@@ -167,13 +166,15 @@ How did you decide what scales to search and how much to overlap windows?
 
 I decided to search only the area close to the car in order to speed-up the classification as well as avoiding false positives. I only considered pixels with an y-value from 400 to 656. 
 
-The sliding window search is performed in the find_cars method of the FeatureExtractor class. 
+The sliding window search is performed in the find_cars method of the *FeatureExtractor* class. 
 
 Within that area, I decided to slide windows of four different sizes (`scale = 1, 1.33, 1.66, 2`). 
 Each of the windows slides with 2 `cells_per_step`, resulting in an overlap of 75 Percent. 
 
 The output boxes of positively classified windows are combined in a heatmap.
-Using a threshold of 1 in that heatmap causes single false-detections to decrease.
+A threshold of 3 is applied to the heatmap. 
+Additionally values of 6 and higher were cropped to six, in order to limit the influence of a single image in video processing considering multiple frames. 
+Using the threshold of 3 in that heatmap caused false-detections to decrease significantly.
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  
 What did you do to optimize the performance of your classifier?
@@ -251,21 +252,20 @@ Here's an example result showing the heatmap from a series of frames of video, t
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  
-Where will your pipeline likely fail?  
-What could you do to make it more robust?
 
 The implementation performs well using the project video, but there is still plenty of room for improvement.
-The bounding boxes are sometimes too large and sometimges too small, or do only cover the trunk of the cars.
-Further-away-cars are not identified since rather large-scaled versions of the car images were used.
-Since I have a rather old Notebook, running the pipeline takes pretty long and thus, only a greatly limited number of parameter combinations was evaluated. 
+Since I have a rather old Notebook, running the pipeline takes pretty long and thus, only a greatly limited number of parameter combinations was evaluated.
 
-* Training a more advanced classifier like a non-linear SVM or a Neuronal Network could improve the classification abilities. 
-
+** Pipeline imperfection**
+* The bounding boxes are sometimes too large and sometimges too small, or do only cover the trunk of the cars.
+* Further-away-cars are not identified since rather large-scaled versions of the car images were used.
 * The pipeline might fail in exotic situations which it was not trained for. 
 E.g. special shaped cars (trucks, motorcycles, etc), in special environments (tunnels, difficult lightning conditions, rain, snow, night).
-
 * Other than that the pipeline is likely to fail on very curvey or mountainous roads since the area of interest might not be in the right place here. 
-As already mentioned, the proposed approach does not detect very far away vehicles (e.g. on a curvy road). 
+* As already mentioned, the proposed approach does not detect very far away vehicles (e.g. on a curvy road). 
 
+**Possible Future Work**
+* Training a more advanced classifier like a non-linear SVM or a Neuronal Network could improve the classification abilities. 
 * A nice approach would be to implement a prediction of detected vehicles for future frames e.g., using a linear model and track them over time. 
-Another idea is to improve the classifier in order to detect and classify different kind of vehicles (bikes, cars, trucks, ..), or also pedestrians. 
+* Another idea is to improve the classifier in order to detect and classify different kind of vehicles (bikes, cars, trucks, ..), or also pedestrians. 
+* One improvment might be to weight the heatmaps of the sliding windows, where the weight decreases with the age of the corresponding heatmap
