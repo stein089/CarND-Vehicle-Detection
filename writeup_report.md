@@ -256,7 +256,8 @@ Here's an example result showing the heatmap from a series of frames of video, t
 The implementation performs well using the project video, but there is still plenty of room for improvement.
 Since I have a rather old Notebook, running the pipeline takes pretty long and thus, only a greatly limited number of parameter combinations was evaluated.
 
-** Pipeline imperfection**
+**Pipeline imperfection**
+
 * The bounding boxes are sometimes too large and sometimges too small, or do only cover the trunk of the cars.
 * Further-away-cars are not identified since rather large-scaled versions of the car images were used.
 * The pipeline might fail in exotic situations which it was not trained for. 
@@ -265,6 +266,7 @@ E.g. special shaped cars (trucks, motorcycles, etc), in special environments (tu
 * As already mentioned, the proposed approach does not detect very far away vehicles (e.g. on a curvy road). 
 
 **Possible Future Work**
+
 * Training a more advanced classifier like a non-linear SVM or a Neuronal Network could improve the classification abilities. 
 * A nice approach would be to implement a prediction of detected vehicles for future frames e.g., using a linear model and track them over time. 
 * Another idea is to improve the classifier in order to detect and classify different kind of vehicles (bikes, cars, trucks, ..), or also pedestrians. 
