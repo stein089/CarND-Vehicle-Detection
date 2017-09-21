@@ -31,17 +31,10 @@ Folders:
 * `test_videos_output`: Output videos using input videos from the `test_videos` folder.
 
 The folder `test_images_output` contains the following:
-* Input image (01_image_in)
-* Undistorted image (02_undistorted_image)
-* Combined threshold - binary image (03_combined)
-* Plotted polygon of ROI onto original image (04_plot_poly_roi)
-* Grayscale image of ROI only (05_image_roi_binary)
-* Polygon for imagepoints/objectspoints on image (06_image_roi_poly1)
-* Warped color image (07_plot_warped_color)
-* Warped grayscale image (08_warped_binary)
-* Polygon in original image (09_result)
-* Polygon onto warped image + windows (09_test)
-* Final result (10_result_text)
+* Input image (`01_image_in_test#.jpg`)
+* Image with all positively predicted boxes (`02_image_boxes_test#.jpg`)
+* Heatmap of the combined boxes (`03_heatmap_test#.jpg`)
+* Output image (`04_out_img_test#.jpg`)
 
 ### The Project
 
